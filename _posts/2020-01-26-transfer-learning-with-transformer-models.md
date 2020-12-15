@@ -15,16 +15,16 @@ Recently in the field of machine translation and text reduction a neural network
 
 Like most sequence transduction models, transformers also follow suit with having an encoder-decode type architecture. Figure below represents the transformer architecture. The transformer models consist of $N=6$  stacked identical layers of encoders and decoders The input text sequences to the encoders are turned into vector representations by using an embedding algorithm. However, since transformer models do not process inputs sequentially, there needs to be a way to contextualize the order of the words in sequences. This is solved by adding Positional Encoding to the input embeddings at the bottom of encoder and decoders each, so it is imperative for positional encoding to have the same size as the input embeddings, so they can be added before to being supplied to the encoder/decoder stack.
 
-![Transformer](https://github.com/omendram/omendram.github.io/raw/master/assets/img/transformer.png | width=150)
+<img src="https://github.com/omendram/omendram.github.io/raw/master/assets/img/transformer.png" width="150">
 
 ## Architecture
 ### Input Vectors
 
 ### Cascaded System
 The cascaded system is when the translation and summarization models are stacked against each other to produce multilingual summaries of text inputs.
-![Transformer](https://github.com/omendram/omendram.github.io/raw/master/assets/img/cascaded.png | width=150)
+<img src="https://github.com/omendram/omendram.github.io/raw/master/assets/img/cascaded.png" width="150">
 
 ### MultiTask Learning
-![Transformer](https://github.com/omendram/omendram.github.io/raw/master/assets/img/multitask.png | width=150)
+<img src="https://github.com/omendram/omendram.github.io/raw/master/assets/img/multitask.png" width="150">
 
 
