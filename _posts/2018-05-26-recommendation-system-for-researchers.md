@@ -19,7 +19,7 @@ By automating the process of finding collaborations, this problem can be solved 
 ### Model
 By combining an architecture consisitng of various topic models to construct a weighted graph of each of the researchers publication backgroung we can establish a system that would rank the researchers based on their compatibility.
 
-<img src="https://github.com/omendram/omendram.github.io/raw/master/assets/img/recommendation-model.png" width="500">
+<img src="https://github.com/omendram/omendram.github.io/raw/master/assets/img/recommendation-model.png" width="700">
 
 ### Ranking Algorithms
 
