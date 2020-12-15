@@ -10,7 +10,25 @@ In this particular case, the novel in use is called â€œAnd Then There Were Noneâ
 
 The process will start by extracting tokens from the text file. These tokens can then be used to apply TF-IDF to the novel, which will be used to extract relevant subsections. After thresholding, part of speech tagging will be applied to the set of most relevant documents. Using this part of speech tagging entities can be extracted based on their tags. Further extraction will take place to retrieve only the relevant characters of the novel. Afterwards a Naive Bayes classifier and a Support Vector Machine will be applied to classify sentences of the retrieved subsections of the novel to extract sentences where a murder might have taken place. Two classifiers will be implemented to compare classifying results and to find the classifier which works best for this task. Finally, we use co-reference resolution to retrieve specific information from the sentences which were classified as sentences where a murder happened.
 
+<img src="https://github.com/omendram/omendram.github.io/raw/master/assets/img/workflow.png" width="500">
 
+### Event Timeline
+
+<img src="https://github.com/omendram/omendram.github.io/raw/master/assets/img/timeline.png" width="500">
+
+
+### SVM and Naive Bayes Classifiers
+
+
+### Coreference Resolution
+After retrieving the meaningful sentences with the help of the classifiers above, the information and events, need to be associated to the individual entities. Which, poses the question of co-reference resolution, as there are descriptions involving multiple events(murders) on the single sentences. In order to do this, a grammar rule was applied on the tagged datasets. 
+
+<img src="https://github.com/omendram/omendram.github.io/raw/master/assets/img/coref1.png" width="500">
+
+
+This rule helped in dividing the sentences, extracting entities, and 8 extracting events for those entities, which also contained the locations and the circumstances of their murders. The grammar rule was applied by using the chunking methods provided by NLTK. We designed it to extract, group of people, the events and also if they shared an event.
+
+<img src="https://github.com/omendram/omendram.github.io/raw/master/assets/img/coref2.png" width="500">
 
 ### Results
 
@@ -26,3 +44,10 @@ The process will start by extracting tokens from the text file. These tokens can
 | Blore | DocNr: 226 | Head was crushed in |
 | Philip Lombard | DocNr: 240 | Shot through the heart |
 | Vera Claythorne | DocNr: 244 | Hanged |
+
+#### Naive Bayes vs SVM
+On the test set Naive Bayes gave an accuracy of 90% while the Support Vector Machine gave an accuracy 92.1%. The classifiers are better at recognizing the Non-Murder sentences, which could because we needed to build the murder dataset by hand, so there is a chance that the classifiers would perform even better with a larger dataset.
+
+<img src="https://github.com/omendram/omendram.github.io/raw/master/assets/img/nbvssvm.png" width="300">
+
+### 
