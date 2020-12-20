@@ -16,7 +16,9 @@ Forex data is publicly available in csv format.
 ### Network
 The network is divided into two main parts, the feedforward layers and the Long Short Term Memory (LSTM)network. There are two feed forwards layers connected thatare charged with pre-processing the data before feeding itto the LSTM which should be able to find patterns in thetime series. The input for this network are the technicalindicators covering a certain input window. The output ofthe network is a Nx2 matrix where N is equal to the sizeof the input window. For each N there are 2 indicators.The first element is considered a bullish indicator (buy)and the second a bearish indicator (sell). This output canthen be interpreted in different ways to make a decision onwhether to buy, sell or do nothing. The following sectionsexplore the different ways in which the input can be fedto the network and how the output can be interpreted tocalculate the profit of the current iteration. 
 
-<img> </img>
+<img src="https://github.com/omendram/omendram.github.io/raw/master/assets/img/bollinger-bands.png" width="500">
+<img src="https://github.com/omendram/omendram.github.io/raw/master/assets/img/network.png" width="500">
+
 
 MACDand RSI are examples of technical indicators used as input.Figure 2: Overview of network structure and input/outputThe size of each layer in the network can be adjusted.During testing the best performance was achieved with asmaller network consisting of around 4 nodes in the firstfeedforward layer, 8 nodes in the second feedforward layerand an LSTM size of 6.
 
@@ -35,8 +37,6 @@ In order to more accurately represent the data as it would be used in a simulate
 The result is a series of overlapping input sequences and their output. The output of each if these executions is then flattened to get an output sequence of size K-N. This output is similar to the way the model would be used in a live environment. The profit function is then called on this output to analyze the performance of the overlapping input sequences.
 
 <img src="https://github.com/omendram/omendram.github.io/raw/master/assets/img/overlap_input.png" width="500">
-
-Figure \ref{fig:overlapinput shows how a single iteration uses multiple consecutive inputs to create a single output window based on multiple inputs. Here the last column of the singular outputs is used, but other methods may be implemented to flatten the window. The network should learn to ignore the other outputs as a result of training.
 
 #### Training Batches
 During training the selected input method is used to sample training windows from the dataset. In order to reduce noise and allow the profit functions to operate on more data to draw a more meaningful conclusion, one single training step will have multiple batches. For the sequential input method this means that the training step will consist of $B$ sequential input windows while the random input method will have $B$ random windows in a single training step. The overlapping method also uses multiple batches consisting of flattened outputs.
