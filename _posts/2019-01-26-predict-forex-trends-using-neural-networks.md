@@ -39,18 +39,18 @@ The result is a series of overlapping input sequences and their output. The outp
 <img src="https://github.com/omendram/omendram.github.io/raw/master/assets/img/overlap_input.png" width="500">
 
 #### Training Batches
-During training the selected input method is used to sample training windows from the dataset. In order to reduce noise and allow the profit functions to operate on more data to draw a more meaningful conclusion, one single training step will have multiple batches. For the sequential input method this means that the training step will consist of $B$ sequential input windows while the random input method will have $B$ random windows in a single training step. The overlapping method also uses multiple batches consisting of flattened outputs.
+During training the selected input method is used to sample training windows from the dataset. In order to reduce noise and allow the profit functions to operate on more data to draw a more meaningful conclusion, one single training step will have multiple batches. For the sequential input method this means that the training step will consist of B sequential input windows while the random input method will have B random windows in a single training step. The overlapping method also uses multiple batches consisting of flattened outputs.
 
 #### Profit Calculations
 Depending on the input method, a profit function is used to analyze the output and assign it a value that indicates the performance of the network as it currently stands. It is important to note that the implementation uses multiple batches in each update. This was done to decrease noise and increase accuracy of the model. This way, the implementation allows for the profit to be calculated for each prediction in the batch and then take the average of this profit to get the final cost for the current set of weights. The section on Particle Swarm Optimization will provide more details as to this implementation.
 
 #### Sequential based
-Since the data is sequential the trading window has a size of $N \times B$, where $N$ is the size of the window used as input of the network and $B$ the number of batches used. Profit is then calculated considering the first element of the output a bull indicator and the second a bear indicator.
+Since the data is sequential the trading window has a size of $N \times B$, where $N$ is the size of the window used as input of the network and B the number of batches used. Profit is then calculated considering the first element of the output a bull indicator and the second a bear indicator.
 
 Both short and long positions are allowed in this situation. A position is opened after 5 consecutive timesteps with the same indicator ON and the other OFF. The position is closed after 3 consecutive timesteps with the opposite indicator of the one used to open the position ON, regardless of the value that the opening indicator value.
 
 #### Random based
-The data found in the batches is not sequential anymore so they have to be treated separately. This means that there are $B$ trading windows. Each of the windows uses the same profit calculation algorithm and the output of the function is then the average profit over all the batches.
+The data found in the batches is not sequential anymore so they have to be treated separately. This means that there are B trading windows. Each of the windows uses the same profit calculation algorithm and the output of the function is then the average profit over all the batches.
 
 Short and long positions are again possible but in a different way. The first element of the output is used for long positions and the second element for short positions. Both kind of positions are opened and closed using the same algorithm.
 A position is opened when an element goes from a value of 0 to 1 and closed when it goes from 1 to 0. This allows having at the same time short and long positions opened therefore, only half of the money is invested every time a position is opened.
